@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ListaGosci>
     <gosc>
-        <email>kowalski@domena.com</email>
+        <email>jacek@domena.pl</email>
         <id>1</id>
-        <imie>Andrzej</imie>
-        <nazwisko>Kowalski</nazwisko>
-        <nrTelefonu>500 400 100</nrTelefonu>
-        <pesel>111111</pesel>
+        <imie>adam</imie>
+        <nazwisko>adamiak</nazwisko>
+        <nrTelefonu>500 400 300</nrTelefonu>
+        <pesel>000</pesel>
     </gosc>
 </ListaGosci>
