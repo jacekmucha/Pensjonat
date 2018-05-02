@@ -9,22 +9,39 @@ public class Pokoj {
 
     private int id;
     private String typ;
-    private boolean czyZajety;
+    private int czyZajety;
     private int liczbaOsob;
     private int liczbaLozek;
     private int lozkoPodwojne;
-    private boolean czyKlimatyzacja;
-    private boolean czyLazienka;
-    private float cena;
-    private float powierzchnia;
+    private int czyKlimatyzacja;
+    private int czyLazienka;
+    private int cena;
+    private int powierzchnia;
     private String wyposazenie;
 
+    public Pokoj() {
+    }
+
+    public Pokoj(int id, String typ, int czyZajety, int liczbaOsob, int liczbaLozek, int lozkoPodwojne, int czyKlimatyzacja, 
+            int czyLazienka, int cena, int powierzchnia, String wyposazenie) {
+        
+        this.id = id;
+        this.typ = typ;
+        this.czyZajety = czyZajety;
+        this.liczbaOsob = liczbaOsob;
+        this.liczbaLozek = liczbaLozek;
+        this.lozkoPodwojne = lozkoPodwojne;
+        this.czyKlimatyzacja = czyKlimatyzacja;
+        this.czyLazienka = czyLazienka;
+        this.cena = cena;
+        this.powierzchnia = powierzchnia;
+        this.wyposazenie = wyposazenie;
+    }
 
     public int getId() {
         return id;
     }
-    
-@XmlElement
+
     public void setId(int id) {
         this.id = id;
     }
@@ -32,18 +49,16 @@ public class Pokoj {
     public String getTyp() {
         return typ;
     }
-    
-@XmlElement
+
     public void setTyp(String typ) {
         this.typ = typ;
     }
 
-    public boolean isCzyZajety() {
+    public int getCzyZajety() {
         return czyZajety;
     }
 
-    @XmlElement
-    public void setCzyZajety(boolean czyZajety) {
+    public void setCzyZajety(int czyZajety) {
         this.czyZajety = czyZajety;
     }
 
@@ -51,7 +66,6 @@ public class Pokoj {
         return liczbaOsob;
     }
 
-    @XmlElement
     public void setLiczbaOsob(int liczbaOsob) {
         this.liczbaOsob = liczbaOsob;
     }
@@ -60,7 +74,6 @@ public class Pokoj {
         return liczbaLozek;
     }
 
-    @XmlElement
     public void setLiczbaLozek(int liczbaLozek) {
         this.liczbaLozek = liczbaLozek;
     }
@@ -69,26 +82,23 @@ public class Pokoj {
         return lozkoPodwojne;
     }
 
-    @XmlElement
     public void setLozkoPodwojne(int lozkoPodwojne) {
         this.lozkoPodwojne = lozkoPodwojne;
     }
 
-    public boolean isCzyKlimatyzacja() {
+    public int getCzyKlimatyzacja() {
         return czyKlimatyzacja;
     }
 
-    @XmlElement
-    public void setCzyKlimatyzacja(boolean czyKlimatyzacja) {
+    public void setCzyKlimatyzacja(int czyKlimatyzacja) {
         this.czyKlimatyzacja = czyKlimatyzacja;
     }
 
-    public boolean isCzyLazienka() {
+    public int getCzyLazienka() {
         return czyLazienka;
     }
 
-    @XmlElement
-    public void setCzyLazienka(boolean czyLazienka) {
+    public void setCzyLazienka(int czyLazienka) {
         this.czyLazienka = czyLazienka;
     }
 
@@ -96,8 +106,7 @@ public class Pokoj {
         return cena;
     }
 
-    @XmlElement
-    public void setCena(float cena) {
+    public void setCena(int cena) {
         this.cena = cena;
     }
 
@@ -105,8 +114,7 @@ public class Pokoj {
         return powierzchnia;
     }
 
-    @XmlElement
-    public void setPowierzchnia(float powierzchnia) {
+    public void setPowierzchnia(int powierzchnia) {
         this.powierzchnia = powierzchnia;
     }
 
@@ -114,45 +122,10 @@ public class Pokoj {
         return wyposazenie;
     }
 
-    @XmlElement
     public void setWyposazenie(String wyposazenie) {
         this.wyposazenie = wyposazenie;
     }
+    
+    
 
-    public Pokoj() {
-    }
-
-    public Pokoj(int id, String typ, boolean czyZajety, int liczbaOsob, int liczbaLozek,
-                 int lozkoPodwojne, boolean czyKlimatyzacja, boolean czyLazienka,
-                 float cena, float powierzchnia, String wyposazenie) {
-
-        this.id = id;
-        this.typ = typ;
-        this.czyZajety = czyZajety;
-        this.liczbaOsob = liczbaOsob;
-        this.liczbaLozek = liczbaLozek;
-        this.lozkoPodwojne = lozkoPodwojne;
-        this.czyKlimatyzacja = czyKlimatyzacja;
-        this.czyLazienka = czyLazienka;
-        this.cena = cena;
-        this.powierzchnia = powierzchnia;
-        this.wyposazenie = wyposazenie;
-    }
-
-    @Override
-    public String toString() {
-        return "Pokoj{" +
-                "id=" + id +
-                ", typ='" + typ + '\'' +
-                ", czyZajety=" + czyZajety +
-                ", liczbaOsob=" + liczbaOsob +
-                ", liczbaLozek=" + liczbaLozek +
-                ", lozkoPodwojne=" + lozkoPodwojne +
-                ", czyKlimatyzacja=" + czyKlimatyzacja +
-                ", czyLazienka=" + czyLazienka +
-                ", cena=" + cena +
-                ", powerzchnia=" + powierzchnia +
-                ", wyposazenie='" + wyposazenie + '\'' +
-                '}';
-    }
 }

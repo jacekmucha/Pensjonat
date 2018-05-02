@@ -18,7 +18,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
-//import pensjonat.Pensjonat;
+import pensjonat.Pensjonat;
 import model.Pokoj;
 import model.Gosc;
 import model.CheckIn;
@@ -95,11 +95,13 @@ public class FramePensjonat extends javax.swing.JFrame {
         insertGoscNowyEmail = new javax.swing.JTextField();
         insertGoscNowyPesel = new javax.swing.JTextField();
         insertGoscNowyNrTelefonu = new javax.swing.JTextField();
-        buttonGoscNowyZatwierdz = new javax.swing.JButton();
+        buttonGoscNowyZatwierdzXML = new javax.swing.JButton();
         labGoscNowyStatus = new javax.swing.JLabel();
         labGoscNowyStatusInfo = new javax.swing.JLabel();
         labGoscNowyID = new javax.swing.JLabel();
         insertGoscNowyIDvalue = new javax.swing.JTextField();
+        buttonGoscNowyZatwierdzSQLite = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         buttonGoscieLista = new javax.swing.JButton();
         panelGoscieLista = new javax.swing.JPanel();
         labGoscieListaNaglowek = new javax.swing.JLabel();
@@ -474,10 +476,10 @@ public class FramePensjonat extends javax.swing.JFrame {
             }
         });
 
-        buttonGoscNowyZatwierdz.setText("Zatwierdź");
-        buttonGoscNowyZatwierdz.addActionListener(new java.awt.event.ActionListener() {
+        buttonGoscNowyZatwierdzXML.setText("XML");
+        buttonGoscNowyZatwierdzXML.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonGoscNowyZatwierdzActionPerformed(evt);
+                buttonGoscNowyZatwierdzXMLActionPerformed(evt);
             }
         });
 
@@ -486,7 +488,7 @@ public class FramePensjonat extends javax.swing.JFrame {
 
         labGoscNowyStatusInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labGoscNowyStatusInfo.setForeground(new java.awt.Color(102, 102, 102));
-        labGoscNowyStatusInfo.setText("oczekuję za zatwierdzenie...");
+        labGoscNowyStatusInfo.setText("wprowadź dane");
 
         labGoscNowyID.setText("ID:");
 
@@ -495,6 +497,19 @@ public class FramePensjonat extends javax.swing.JFrame {
                 insertGoscNowyIDvalueActionPerformed(evt);
             }
         });
+
+        buttonGoscNowyZatwierdzSQLite.setText("ZATWIERDŹ");
+        buttonGoscNowyZatwierdzSQLite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGoscNowyZatwierdzSQLiteActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel8.setText("Wstaw do bazy SQLite");
+        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout panelGoscieNowyLayout = new javax.swing.GroupLayout(panelGoscieNowy);
         panelGoscieNowy.setLayout(panelGoscieNowyLayout);
@@ -512,9 +527,16 @@ public class FramePensjonat extends javax.swing.JFrame {
                             .addComponent(labGoscNowyStatusInfo))
                         .addGap(27, 27, 27)
                         .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonGoscNowyZatwierdz, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(insertGoscNowyEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labGoscNowyEmail)))
+                            .addComponent(labGoscNowyEmail)
+                            .addGroup(panelGoscieNowyLayout.createSequentialGroup()
+                                .addComponent(buttonGoscNowyZatwierdzXML, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(panelGoscieNowyLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                                    .addComponent(buttonGoscNowyZatwierdzSQLite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(insertGoscNowyEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelGoscieNowyLayout.createSequentialGroup()
                         .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoscieNowyLayout.createSequentialGroup()
@@ -524,14 +546,14 @@ public class FramePensjonat extends javax.swing.JFrame {
                                 .addGap(27, 27, 27))
                             .addGroup(panelGoscieNowyLayout.createSequentialGroup()
                                 .addComponent(insertGoscNowyPesel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)))
                         .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(insertGoscNowyIDvalue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(labGoscNowyNazwisko)
                                 .addComponent(insertGoscNowyNazwisko, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(labGoscNowyID)))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         panelGoscieNowyLayout.setVerticalGroup(
             panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,13 +588,16 @@ public class FramePensjonat extends javax.swing.JFrame {
                     .addComponent(insertGoscNowyEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(insertGoscNowyNrTelefonu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
-                .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonGoscNowyZatwierdz, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonGoscNowyZatwierdzSQLite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonGoscNowyZatwierdzXML, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addGroup(panelGoscieNowyLayout.createSequentialGroup()
                         .addComponent(labGoscNowyStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(labGoscNowyStatusInfo)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         buttonGoscieLista.setText("Lista gości");
@@ -1152,7 +1177,7 @@ public class FramePensjonat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonChecInWsteczActionPerformed
 
-    private void buttonGoscNowyZatwierdzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGoscNowyZatwierdzActionPerformed
+    private void buttonGoscNowyZatwierdzXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGoscNowyZatwierdzXMLActionPerformed
         // TODO add your handling code here:
         
     int nowyGoscID = Integer.parseInt(String.valueOf(insertGoscNowyIDvalue.getText()));
@@ -1163,17 +1188,16 @@ public class FramePensjonat extends javax.swing.JFrame {
     String nowyGoscEmail = insertGoscNowyEmail.getText();
            
     
-       GoscDodaj.dodajGoscia(
+       GoscDodaj.dodajGosciaXML(
                nowyGoscID, 
                nowyGoscImie,
                nowyGoscNazwisko,
                nowyGoscPesel,
                nowyGoscNrTelefonu,
                nowyGoscEmail);
-
+ 
         
-        
-    }//GEN-LAST:event_buttonGoscNowyZatwierdzActionPerformed
+    }//GEN-LAST:event_buttonGoscNowyZatwierdzXMLActionPerformed
 
     private void buttonUstawieniaXMLGoscieWeryfikujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUstawieniaXMLGoscieWeryfikujActionPerformed
         // TODO add your handling code here:
@@ -1279,14 +1303,28 @@ public class FramePensjonat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_insertGoscNowyIDvalueActionPerformed
 
+    private void buttonGoscNowyZatwierdzSQLiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGoscNowyZatwierdzSQLiteActionPerformed
+        // TODO add your handling code here:
+        
+
+    String nowyGoscImie = insertGoscNowyImie.getText();
+    String nowyGoscNazwisko = insertGoscNowyNazwisko.getText();
+    String nowyGoscPesel = insertGoscNowyPesel.getText();
+    String nowyGoscNrTelefonu = insertGoscNowyNrTelefonu.getText();
+    String nowyGoscEmail = insertGoscNowyEmail.getText();
+        
+        
+        Pensjonat pensjonat = new Pensjonat();
+        pensjonat.insertGosc(nowyGoscImie, nowyGoscNazwisko, nowyGoscPesel, nowyGoscNrTelefonu, nowyGoscEmail);
+        
+ 
+        
+    }//GEN-LAST:event_buttonGoscNowyZatwierdzSQLiteActionPerformed
 
 
     
     public static void main(String args[]) {
-        
-
-
-        
+       
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1317,12 +1355,24 @@ public class FramePensjonat extends javax.swing.JFrame {
                 new FramePensjonat().setVisible(true);
             }
         });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     
-    
-    
-    
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1330,7 +1380,8 @@ public class FramePensjonat extends javax.swing.JFrame {
     private javax.swing.JButton buttonChecInWstecz;
     private javax.swing.JButton buttonCheckIn;
     private javax.swing.JButton buttonCheckOut;
-    private javax.swing.JButton buttonGoscNowyZatwierdz;
+    private javax.swing.JButton buttonGoscNowyZatwierdzSQLite;
+    private javax.swing.JButton buttonGoscNowyZatwierdzXML;
     private javax.swing.JButton buttonGoscie;
     private javax.swing.JButton buttonGoscieLista;
     private javax.swing.JButton buttonGoscieListaAktualizuj;
@@ -1358,6 +1409,7 @@ public class FramePensjonat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel labChecInDane;

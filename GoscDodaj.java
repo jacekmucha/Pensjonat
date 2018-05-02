@@ -25,7 +25,7 @@ public class GoscDodaj extends FramePensjonat{
 
     
 
-    public static void dodajGoscia(
+    public static void dodajGosciaXML(
             int nowyGoscID,
             String nowyGoscImie,
             String nowyGoscNazwisko,
