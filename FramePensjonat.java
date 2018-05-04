@@ -631,7 +631,7 @@ public class FramePensjonat extends javax.swing.JFrame {
         );
         jTable1.setModel(model);
 
-        for (Gosc g : dbc.getAll() ) {
+        for (Gosc g : dbc.selectGosc() ) {
 
             model.addRow(
                 new Object[]{
@@ -1548,6 +1548,7 @@ public class FramePensjonat extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new FramePensjonat().setVisible(true);
             }
@@ -1555,11 +1556,11 @@ public class FramePensjonat extends javax.swing.JFrame {
 
 
         
-        
+          
     }
 
 
- public DBConnect dbc = new DBConnect();
+private DBConnect dbc = new DBConnect();
  
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

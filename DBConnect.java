@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class DBConnect extends FramePensjonat {
+public class DBConnect {
 
     public static final String DRIVER = "org.sqlite.JDBC";
     public static final String DB_URL = "jdbc:sqlite:C:\\Users\\HP\\Documents\\NetBeansProjects\\Pensjonat\\src\\database\\pensjonat.db";
@@ -232,6 +232,8 @@ public class DBConnect extends FramePensjonat {
         return pokoje;
 
     }
+    
+    
 
     public  void closeConnection(){
         try {
