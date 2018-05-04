@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ListaGosci>
+    <gosc>
+        <email>vvv</email>
+        <id>0</id>
+        <imie>vvv</imie>
+        <nazwisko>vvv</nazwisko>
+        <nrTelefonu>vvv</nrTelefonu>
+        <pesel>vvv</pesel>
+    </gosc>
+</ListaGosci>

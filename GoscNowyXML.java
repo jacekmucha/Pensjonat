@@ -20,13 +20,12 @@ import model.ListGosc;
  *
  * @author HP
  */
-public class GoscDodaj extends FramePensjonat{
+public class GoscNowyXML extends FramePensjonat{
 
 
     
 
     public static void dodajGosciaXML(
-            int nowyGoscID,
             String nowyGoscImie,
             String nowyGoscNazwisko,
             String nowyGoscPesel,
@@ -38,7 +37,6 @@ public class GoscDodaj extends FramePensjonat{
             List<Gosc> listaGosciKod = new ArrayList<>();
 
             listaGosciKod.add(new Gosc(
-                    nowyGoscID,
                     nowyGoscImie,
                     nowyGoscNazwisko,
                     nowyGoscPesel,
@@ -49,7 +47,7 @@ public class GoscDodaj extends FramePensjonat{
             ListGosc lg = new ListGosc();
             lg.setListaGosci(listaGosciKod);
 
-            File goscieXmlBaza = new File("C:\\Users\\HP\\Documents\\NetBeansProjects\\Pensjonat\\src\\database\\bazaXMLgoscie.xml");
+            File goscieXmlBaza = new File("C:\\Users\\HP\\Documents\\NetBeansProjects\\Pensjonat\\src\\database\\nowyGoscXML.xml");
 
             JAXBContext context = JAXBContext.newInstance(ListGosc.class);
 
@@ -58,7 +56,10 @@ public class GoscDodaj extends FramePensjonat{
 
             marshaller.marshal(lg, goscieXmlBaza);
 
-        } catch (JAXBException exception) {
+        } 
+       
+        
+        catch (JAXBException exception) {
             System.out.println("Problem z załadowaniem danych");
             exception.printStackTrace();
         }

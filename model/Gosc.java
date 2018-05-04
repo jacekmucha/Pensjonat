@@ -27,7 +27,13 @@ public class Gosc {
         this.email = email;
     }
     
-    
+        public Gosc(String imie, String nazwisko, String pesel, String nrTelefonu, String email) {
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.pesel = pesel;
+        this.nrTelefonu = nrTelefonu;
+        this.email = email;
+    }
     
     
     
@@ -35,7 +41,7 @@ public class Gosc {
         return id;
     }
     
-    @XmlElement
+     
     public void setId(int id) {
         this.id = id;
     }

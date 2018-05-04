@@ -10,22 +10,23 @@ import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
-import pensjonat.Pensjonat;
 import model.Pokoj;
 import model.Gosc;
 import model.CheckIn;
 import model.CheckOut;
 
 import model.ListGosc;
-
+import org.w3c.dom.css.RGBColor;
 
 /**
  *
@@ -33,13 +34,12 @@ import model.ListGosc;
  */
 public class FramePensjonat extends javax.swing.JFrame {
 
-
     /**
      * Creates new form FramePensjonat
      */
     public FramePensjonat() {
         initComponents();
-        
+
         panelStart.setVisible(true);
         panelGoscie.setVisible(false);
         panelPokoje.setVisible(false);
@@ -82,7 +82,6 @@ public class FramePensjonat extends javax.swing.JFrame {
         programNazwa = new javax.swing.JLabel();
         programWersja = new javax.swing.JLabel();
         panelGoscie = new javax.swing.JPanel();
-        panelGoscieSeparator = new javax.swing.JPanel();
         buttonGoscieNowy = new javax.swing.JButton();
         panelGoscieNowy = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -95,20 +94,38 @@ public class FramePensjonat extends javax.swing.JFrame {
         insertGoscNowyEmail = new javax.swing.JTextField();
         insertGoscNowyPesel = new javax.swing.JTextField();
         insertGoscNowyNrTelefonu = new javax.swing.JTextField();
-        buttonGoscNowyZatwierdzXML = new javax.swing.JButton();
+        buttonGoscNowyXML = new javax.swing.JButton();
         labGoscNowyStatus = new javax.swing.JLabel();
         labGoscNowyStatusInfo = new javax.swing.JLabel();
-        labGoscNowyID = new javax.swing.JLabel();
-        insertGoscNowyIDvalue = new javax.swing.JTextField();
         buttonGoscNowyZatwierdzSQLite = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         buttonGoscieLista = new javax.swing.JButton();
         panelGoscieLista = new javax.swing.JPanel();
-        labGoscieListaNaglowek = new javax.swing.JLabel();
-        labGoscieListaLista = new javax.swing.JLabel();
-        buttonGoscieListaAktualizuj = new javax.swing.JButton();
+        buttonListaWczytaj = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        buttonListaWyczysc = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         buttonGoscieUsun = new javax.swing.JButton();
         panelGoscieUsun = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         panelPokoje = new javax.swing.JPanel();
         panelCheckIn = new javax.swing.JPanel();
         panelCheckInPostep = new javax.swing.JPanel();
@@ -235,7 +252,7 @@ public class FramePensjonat extends javax.swing.JFrame {
                 .addComponent(buttonUstawienia, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(buttonWyjscie, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         panelStatus.setBackground(new java.awt.Color(255, 204, 51));
@@ -333,7 +350,7 @@ public class FramePensjonat extends javax.swing.JFrame {
                         .addGroup(panelStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(programNazwa8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(programNazwa5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                         .addComponent(programNazwa11)))
                 .addGap(28, 28, 28))
         );
@@ -393,7 +410,7 @@ public class FramePensjonat extends javax.swing.JFrame {
         panelStartLayout.setHorizontalGroup(
             panelStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelStartLayout.createSequentialGroup()
-                .addContainerGap(313, Short.MAX_VALUE)
+                .addContainerGap(332, Short.MAX_VALUE)
                 .addGroup(panelStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(programWersja)
                     .addComponent(programNazwa))
@@ -411,25 +428,14 @@ public class FramePensjonat extends javax.swing.JFrame {
 
         panelGoscie.setBackground(new java.awt.Color(204, 204, 204));
 
-        panelGoscieSeparator.setBackground(new java.awt.Color(204, 102, 0));
-
-        javax.swing.GroupLayout panelGoscieSeparatorLayout = new javax.swing.GroupLayout(panelGoscieSeparator);
-        panelGoscieSeparator.setLayout(panelGoscieSeparatorLayout);
-        panelGoscieSeparatorLayout.setHorizontalGroup(
-            panelGoscieSeparatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 13, Short.MAX_VALUE)
-        );
-        panelGoscieSeparatorLayout.setVerticalGroup(
-            panelGoscieSeparatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         buttonGoscieNowy.setText("Nowy Gość");
         buttonGoscieNowy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonGoscieNowyActionPerformed(evt);
             }
         });
+
+        panelGoscieNowy.setPreferredSize(new java.awt.Dimension(600, 530));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Imię:");
@@ -476,10 +482,10 @@ public class FramePensjonat extends javax.swing.JFrame {
             }
         });
 
-        buttonGoscNowyZatwierdzXML.setText("XML");
-        buttonGoscNowyZatwierdzXML.addActionListener(new java.awt.event.ActionListener() {
+        buttonGoscNowyXML.setText("XML");
+        buttonGoscNowyXML.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonGoscNowyZatwierdzXMLActionPerformed(evt);
+                buttonGoscNowyXMLActionPerformed(evt);
             }
         });
 
@@ -490,26 +496,19 @@ public class FramePensjonat extends javax.swing.JFrame {
         labGoscNowyStatusInfo.setForeground(new java.awt.Color(102, 102, 102));
         labGoscNowyStatusInfo.setText("wprowadź dane");
 
-        labGoscNowyID.setText("ID:");
-
-        insertGoscNowyIDvalue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertGoscNowyIDvalueActionPerformed(evt);
-            }
-        });
-
-        buttonGoscNowyZatwierdzSQLite.setText("ZATWIERDŹ");
+        buttonGoscNowyZatwierdzSQLite.setText("ZAPISZ do Bazy Danych");
         buttonGoscNowyZatwierdzSQLite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonGoscNowyZatwierdzSQLiteActionPerformed(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setText("Wstaw do bazy SQLite");
-        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jButton1.setText("Wyczyść");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelGoscieNowyLayout = new javax.swing.GroupLayout(panelGoscieNowy);
         panelGoscieNowy.setLayout(panelGoscieNowyLayout);
@@ -518,66 +517,47 @@ public class FramePensjonat extends javax.swing.JFrame {
             .addGroup(panelGoscieNowyLayout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(insertGoscNowyPesel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(insertGoscNowyImie, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labGoscNowyPesel)
                     .addGroup(panelGoscieNowyLayout.createSequentialGroup()
                         .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(insertGoscNowyNrTelefonu, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labGoscNowyNrTelefonu)
                             .addComponent(labGoscNowyStatus)
-                            .addComponent(labGoscNowyStatusInfo))
+                            .addComponent(labGoscNowyStatusInfo)
+                            .addComponent(jLabel2))
                         .addGap(27, 27, 27)
                         .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labGoscNowyEmail)
-                            .addGroup(panelGoscieNowyLayout.createSequentialGroup()
-                                .addComponent(buttonGoscNowyZatwierdzXML, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(panelGoscieNowyLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                                    .addComponent(buttonGoscNowyZatwierdzSQLite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(insertGoscNowyEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelGoscieNowyLayout.createSequentialGroup()
-                        .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoscieNowyLayout.createSequentialGroup()
-                                .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(insertGoscNowyImie, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addGap(27, 27, 27))
-                            .addGroup(panelGoscieNowyLayout.createSequentialGroup()
-                                .addComponent(insertGoscNowyPesel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)))
-                        .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(insertGoscNowyIDvalue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labGoscNowyNazwisko)
-                                .addComponent(insertGoscNowyNazwisko, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labGoscNowyID)))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                            .addComponent(insertGoscNowyNazwisko, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(labGoscNowyEmail)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoscieNowyLayout.createSequentialGroup()
+                                    .addComponent(buttonGoscNowyXML, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(insertGoscNowyEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonGoscNowyZatwierdzSQLite, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(labGoscNowyNazwisko))))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         panelGoscieNowyLayout.setVerticalGroup(
             panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGoscieNowyLayout.createSequentialGroup()
-                .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelGoscieNowyLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(labGoscNowyNazwisko))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoscieNowyLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)))
+                .addGap(24, 24, 24)
+                .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(labGoscNowyNazwisko))
                 .addGap(11, 11, 11)
                 .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(insertGoscNowyNazwisko, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(insertGoscNowyImie, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labGoscNowyPesel)
-                    .addComponent(labGoscNowyID))
+                .addComponent(labGoscNowyPesel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelGoscieNowyLayout.createSequentialGroup()
-                        .addComponent(insertGoscNowyIDvalue, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addGap(70, 70, 70)
                         .addComponent(labGoscNowyEmail))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoscieNowyLayout.createSequentialGroup()
                         .addComponent(insertGoscNowyPesel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -587,17 +567,17 @@ public class FramePensjonat extends javax.swing.JFrame {
                 .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(insertGoscNowyEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(insertGoscNowyNrTelefonu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                .addGap(54, 54, 54)
+                .addComponent(buttonGoscNowyZatwierdzSQLite, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGoscieNowyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonGoscNowyZatwierdzSQLite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonGoscNowyZatwierdzXML, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonGoscNowyXML, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addGroup(panelGoscieNowyLayout.createSequentialGroup()
                         .addComponent(labGoscNowyStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(labGoscNowyStatusInfo)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         buttonGoscieLista.setText("Lista gości");
@@ -607,39 +587,103 @@ public class FramePensjonat extends javax.swing.JFrame {
             }
         });
 
-        labGoscieListaNaglowek.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        labGoscieListaNaglowek.setText("Aktualna lista Gości:");
+        panelGoscieLista.setPreferredSize(new java.awt.Dimension(600, 530));
 
-        labGoscieListaLista.setBackground(new java.awt.Color(204, 204, 204));
-        labGoscieListaLista.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labGoscieListaLista.setText("........");
-        labGoscieListaLista.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        buttonListaWczytaj.setText("Wczytaj aktualną listę");
+        buttonListaWczytaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonListaWczytajActionPerformed(evt);
+            }
+        });
 
-        buttonGoscieListaAktualizuj.setText("Aktualizuj");
+        jButton3.setText("Dodaj");
+
+        jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel14.setText("Lista Gości:");
+
+        jButton6.setText("Usuń ");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("Przekwateruj");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        buttonListaWyczysc.setText("Wyczyść widok");
+        buttonListaWyczysc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonListaWyczyscActionPerformed(evt);
+            }
+        });
+
+        javax.swing.table.DefaultTableModel model =
+        new javax.swing.table.DefaultTableModel(
+
+            new String [] {
+                "ID", "Imię", "Nazwisko", "PESEL", "Nr tel.", "Email"
+            }, 0
+        );
+        jTable1.setModel(model);
+
+        for (Gosc g : dbc.getAll() ) {
+
+            model.addRow(
+                new Object[]{
+
+                    g.getId(), g.getImie(), g.getNazwisko(),
+                    g.getPesel(), g.getNrTelefonu(), g.getEmail()
+
+                }
+
+            );
+        }
+        jScrollPane3.setViewportView(jTable1);
 
         javax.swing.GroupLayout panelGoscieListaLayout = new javax.swing.GroupLayout(panelGoscieLista);
         panelGoscieLista.setLayout(panelGoscieListaLayout);
         panelGoscieListaLayout.setHorizontalGroup(
             panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGoscieListaLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonGoscieListaAktualizuj, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(labGoscieListaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labGoscieListaNaglowek)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGoscieListaLayout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(panelGoscieListaLayout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonListaWyczysc, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(buttonListaWczytaj, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         panelGoscieListaLayout.setVerticalGroup(
             panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGoscieListaLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(labGoscieListaNaglowek)
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonListaWczytaj, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonListaWyczysc, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
                 .addGap(18, 18, 18)
-                .addComponent(labGoscieListaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buttonGoscieListaAktualizuj, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                .addGap(31, 31, 31))
+                .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
 
         buttonGoscieUsun.setText("Usuń Gościa");
@@ -649,15 +693,110 @@ public class FramePensjonat extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Imię:");
+
+        jTextField1.setText("jTextField1");
+
+        jLabel9.setText("Nazwisko:");
+
+        jTextField2.setText("jTextField2");
+
+        jLabel10.setText("PESEL:");
+
+        jTextField3.setText("jTextField2");
+
+        jLabel11.setText("Nr telefonu:");
+
+        jTextField4.setText("jTextField2");
+
+        jLabel12.setText("Email:");
+
+        jTextField5.setText("jTextField2");
+
+        jButton4.setText("Szukaj");
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel13.setText("Wyszukaj Gościa:");
+
+        jButton5.setText("Usuń");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout panelGoscieUsunLayout = new javax.swing.GroupLayout(panelGoscieUsun);
         panelGoscieUsun.setLayout(panelGoscieUsunLayout);
         panelGoscieUsunLayout.setHorizontalGroup(
             panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 537, Short.MAX_VALUE)
+            .addGroup(panelGoscieUsunLayout.createSequentialGroup()
+                .addGroup(panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelGoscieUsunLayout.createSequentialGroup()
+                            .addGap(28, 28, 28)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelGoscieUsunLayout.createSequentialGroup()
+                            .addGap(42, 42, 42)
+                            .addGroup(panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel8)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel11)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel13))
+                            .addGap(22, 22, 22)
+                            .addGroup(panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12)
+                                .addComponent(jLabel9))
+                            .addGap(18, 18, 18)
+                            .addGroup(panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelGoscieUsunLayout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jTextField4))))
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         panelGoscieUsunLayout.setVerticalGroup(
             panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoscieUsunLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addGroup(panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField4)
+                    .addComponent(jTextField1)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelGoscieUsunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
         );
 
         javax.swing.GroupLayout panelGoscieLayout = new javax.swing.GroupLayout(panelGoscie);
@@ -665,38 +804,39 @@ public class FramePensjonat extends javax.swing.JFrame {
         panelGoscieLayout.setHorizontalGroup(
             panelGoscieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGoscieLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
                 .addGroup(panelGoscieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonGoscieNowy, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonGoscieLista, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonGoscieUsun, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addComponent(panelGoscieSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelGoscieNowy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelGoscieLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(panelGoscieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonGoscieLista, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonGoscieUsun, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoscieLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(buttonGoscieNowy, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelGoscieNowy, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
             .addGroup(panelGoscieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoscieLayout.createSequentialGroup()
-                    .addGap(0, 243, Short.MAX_VALUE)
-                    .addComponent(panelGoscieLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 175, Short.MAX_VALUE)
+                    .addComponent(panelGoscieLista, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)))
             .addGroup(panelGoscieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoscieLayout.createSequentialGroup()
-                    .addGap(0, 242, Short.MAX_VALUE)
-                    .addComponent(panelGoscieUsun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 175, Short.MAX_VALUE)
+                    .addComponent(panelGoscieUsun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelGoscieLayout.setVerticalGroup(
             panelGoscieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGoscieSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelGoscieNowy, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
             .addGroup(panelGoscieLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(32, 32, 32)
                 .addComponent(buttonGoscieNowy, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonGoscieLista, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonGoscieUsun, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
-            .addComponent(panelGoscieNowy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
             .addGroup(panelGoscieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelGoscieLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelGoscieLista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE))
             .addGroup(panelGoscieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(panelGoscieUsun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -857,10 +997,10 @@ public class FramePensjonat extends javax.swing.JFrame {
         labUstawieniaStatusXMLGoscieCheck.setText("<kliknij Weryfikuj>");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("Lokalizacja pliku z Bazą Danych XML o Gościach:");
+        jLabel6.setText("Lokalizacja pliku XML z informacją o nowym Gościu:");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("C:\\\\Users\\\\HP\\\\Documents\\\\NetBeansProjects\\\\Pensjonat\\\\src\\\\database\\\\bazaXMLgoscie.xml");
+        jLabel7.setText("C:\\\\Users\\\\HP\\\\Documents\\\\NetBeansProjects\\\\Pensjonat\\\\src\\\\database\\\\nowyGoscXML.xml");
 
         labUstawieniaStatusBazy2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labUstawieniaStatusBazy2.setText("Status Bazy Danych:");
@@ -999,19 +1139,19 @@ public class FramePensjonat extends javax.swing.JFrame {
                     .addComponent(panelGoscie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 323, Short.MAX_VALUE)
+                    .addGap(0, 344, Short.MAX_VALUE)
                     .addComponent(panelPokoje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 323, Short.MAX_VALUE)
+                    .addGap(0, 344, Short.MAX_VALUE)
                     .addComponent(panelCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 323, Short.MAX_VALUE)
+                    .addGap(0, 344, Short.MAX_VALUE)
                     .addComponent(panelCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 322, Short.MAX_VALUE)
+                    .addGap(0, 347, Short.MAX_VALUE)
                     .addComponent(panelUstawienia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
@@ -1029,19 +1169,19 @@ public class FramePensjonat extends javax.swing.JFrame {
                     .addComponent(panelGoscie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 157, Short.MAX_VALUE)
+                    .addGap(0, 168, Short.MAX_VALUE)
                     .addComponent(panelPokoje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 148, Short.MAX_VALUE)
+                    .addGap(0, 159, Short.MAX_VALUE)
                     .addComponent(panelCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 156, Short.MAX_VALUE)
+                    .addGap(0, 167, Short.MAX_VALUE)
                     .addComponent(panelCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 156, Short.MAX_VALUE)
+                    .addGap(0, 170, Short.MAX_VALUE)
                     .addComponent(panelUstawienia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -1050,77 +1190,77 @@ public class FramePensjonat extends javax.swing.JFrame {
 
     private void imgLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLogoMouseClicked
         // TODO add your handling code here:
-        
+
         panelStart.setVisible(true);
         panelGoscie.setVisible(false);
         panelPokoje.setVisible(false);
         panelCheckIn.setVisible(false);
         panelCheckOut.setVisible(false);
         panelUstawienia.setVisible(false);
-        
+
     }//GEN-LAST:event_imgLogoMouseClicked
 
     private void insertGoscNowyImieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertGoscNowyImieActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_insertGoscNowyImieActionPerformed
 
     private void buttonGoscieNowyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGoscieNowyActionPerformed
         // TODO add your handling code here:
-        
+
         panelGoscieNowy.setVisible(true);
         panelGoscieLista.setVisible(false);
         panelGoscieUsun.setVisible(false);
-        
+
     }//GEN-LAST:event_buttonGoscieNowyActionPerformed
 
     private void buttonGoscieListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGoscieListaActionPerformed
         // TODO add your handling code here:
-        
+
         panelGoscieNowy.setVisible(false);
         panelGoscieLista.setVisible(true);
         panelGoscieUsun.setVisible(false);
-        
+
     }//GEN-LAST:event_buttonGoscieListaActionPerformed
 
     private void buttonGoscieUsunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGoscieUsunActionPerformed
         // TODO add your handling code here:
-        
+
         panelGoscieNowy.setVisible(false);
         panelGoscieLista.setVisible(false);
         panelGoscieUsun.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_buttonGoscieUsunActionPerformed
 
     private void buttonGoscieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGoscieActionPerformed
         // TODO add your handling code here:
-        
+
         panelStart.setVisible(false);
         panelGoscie.setVisible(true);
         panelPokoje.setVisible(false);
         panelCheckIn.setVisible(false);
         panelCheckOut.setVisible(false);
         panelUstawienia.setVisible(false);
-        
-        
+
+
     }//GEN-LAST:event_buttonGoscieActionPerformed
 
     private void buttonPokojeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPokojeActionPerformed
         // TODO add your handling code here:
-        
+
         panelStart.setVisible(false);
         panelGoscie.setVisible(false);
         panelPokoje.setVisible(true);
         panelCheckIn.setVisible(false);
         panelCheckOut.setVisible(false);
-        panelUstawienia.setVisible(false);       
-        
+        panelUstawienia.setVisible(false);
+
     }//GEN-LAST:event_buttonPokojeActionPerformed
 
     private void buttonCheckInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckInActionPerformed
         // TODO add your handling code here:
-        
+
         panelStart.setVisible(false);
         panelGoscie.setVisible(false);
         panelPokoje.setVisible(false);
@@ -1131,7 +1271,7 @@ public class FramePensjonat extends javax.swing.JFrame {
 
     private void buttonCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckOutActionPerformed
         // TODO add your handling code here:
-        
+
         panelStart.setVisible(false);
         panelGoscie.setVisible(false);
         panelPokoje.setVisible(false);
@@ -1142,31 +1282,30 @@ public class FramePensjonat extends javax.swing.JFrame {
 
     private void buttonUstawieniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUstawieniaActionPerformed
         // TODO add your handling code here:
-        
+
         panelStart.setVisible(false);
         panelGoscie.setVisible(false);
         panelPokoje.setVisible(false);
         panelCheckIn.setVisible(false);
         panelCheckOut.setVisible(false);
         panelUstawienia.setVisible(true);
-        
+
     }//GEN-LAST:event_buttonUstawieniaActionPerformed
 
     private void buttonUstawieniaSQLiteWeryfikujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUstawieniaSQLiteWeryfikujActionPerformed
         // TODO add your handling code here:
-        
+
         File bazadanych = new File("C:\\Users\\HP\\Documents\\NetBeansProjects\\Pensjonat\\src\\database\\pensjonat.db");
-        if(bazadanych.exists() == true) {
-            labUstawieniaStatusBazyCheck.setForeground(Color.GREEN);
-            labUstawieniaStatusBazyCheck.setText("Wykryto plik bazy danych");
+        if (bazadanych.exists() == true) {
+            labUstawieniaStatusBazyCheck.setForeground(new java.awt.Color(0, 200, 0));
+            labUstawieniaStatusBazyCheck.setText("Wykryto plik bazy danych!");
         } else {
             labUstawieniaStatusBazyCheck.setForeground(Color.RED);
-            labUstawieniaStatusBazyCheck.setText("Brak pliku bazy danych");
+            labUstawieniaStatusBazyCheck.setText("Brak pliku bazy danych!");
 
         }
-         
-      
-        
+
+
     }//GEN-LAST:event_buttonUstawieniaSQLiteWeryfikujActionPerformed
 
     private void buttonChecInDalejActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChecInDalejActionPerformed
@@ -1177,114 +1316,125 @@ public class FramePensjonat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonChecInWsteczActionPerformed
 
-    private void buttonGoscNowyZatwierdzXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGoscNowyZatwierdzXMLActionPerformed
+    private void buttonGoscNowyXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGoscNowyXMLActionPerformed
         // TODO add your handling code here:
-        
-    int nowyGoscID = Integer.parseInt(String.valueOf(insertGoscNowyIDvalue.getText()));
-    String nowyGoscImie = insertGoscNowyImie.getText();
-    String nowyGoscNazwisko = insertGoscNowyNazwisko.getText();
-    String nowyGoscPesel = insertGoscNowyPesel.getText();
-    String nowyGoscNrTelefonu = insertGoscNowyNrTelefonu.getText();
-    String nowyGoscEmail = insertGoscNowyEmail.getText();
-           
-    
-       GoscDodaj.dodajGosciaXML(
-               nowyGoscID, 
-               nowyGoscImie,
-               nowyGoscNazwisko,
-               nowyGoscPesel,
-               nowyGoscNrTelefonu,
-               nowyGoscEmail);
- 
-        
-    }//GEN-LAST:event_buttonGoscNowyZatwierdzXMLActionPerformed
+
+        String nowyGoscImie = insertGoscNowyImie.getText();
+        String nowyGoscNazwisko = insertGoscNowyNazwisko.getText();
+        String nowyGoscPesel = insertGoscNowyPesel.getText();
+        String nowyGoscNrTelefonu = insertGoscNowyNrTelefonu.getText();
+        String nowyGoscEmail = insertGoscNowyEmail.getText();
+
+        if (nowyGoscImie.isEmpty()
+                | nowyGoscNazwisko.isEmpty()
+                | nowyGoscPesel.isEmpty()
+                | nowyGoscNrTelefonu.isEmpty()
+                | nowyGoscEmail.isEmpty()) {
+
+            labGoscNowyStatusInfo.setText("Puste pole!");
+            labGoscNowyStatusInfo.setForeground(Color.red);
+        } else {
+
+            GoscNowyXML.dodajGosciaXML(
+                    nowyGoscImie,
+                    nowyGoscNazwisko,
+                    nowyGoscPesel,
+                    nowyGoscNrTelefonu,
+                    nowyGoscEmail);
+
+            labGoscNowyStatusInfo.setText("Zapisano XML!");
+            labGoscNowyStatusInfo.setForeground(new java.awt.Color(0, 200, 0));
+            
+
+        }
+
+
+    }//GEN-LAST:event_buttonGoscNowyXMLActionPerformed
+
 
     private void buttonUstawieniaXMLGoscieWeryfikujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUstawieniaXMLGoscieWeryfikujActionPerformed
         // TODO add your handling code here:
-        
+
         File bazaXMLgoscie = new File("C:\\Users\\HP\\Documents\\NetBeansProjects\\Pensjonat\\src\\database\\bazaXMLgoscie.xml");
-        if(bazaXMLgoscie.isFile() == true) {
-            labUstawieniaStatusXMLGoscieCheck.setForeground(Color.GREEN);
+        if (bazaXMLgoscie.isFile() == true) {
+            labUstawieniaStatusXMLGoscieCheck.setForeground(new java.awt.Color(0, 200, 0));
             labUstawieniaStatusXMLGoscieCheck.setText("Plik XML istnieje!");
         } else {
-            labUstawieniaStatusXMLGoscieCheck.setForeground(Color.GREEN);
+            labUstawieniaStatusXMLGoscieCheck.setForeground(Color.RED);
             labUstawieniaStatusXMLGoscieCheck.setText("Brak pliku XML!");
         }
-        
-        
+
+
     }//GEN-LAST:event_buttonUstawieniaXMLGoscieWeryfikujActionPerformed
 
     private void buttonUstawieniaXMLPokojeWeryfikujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUstawieniaXMLPokojeWeryfikujActionPerformed
         // TODO add your handling code here:
-        
+
         File bazaXMLpokoje = new File("C:\\Users\\HP\\Documents\\NetBeansProjects\\Pensjonat\\src\\database\\bazaXMLpokoje.xml");
-        if(bazaXMLpokoje.isFile() == true) {
-            labUstawieniaStatusXMLPokojeCheck.setForeground(Color.GREEN);
+        if (bazaXMLpokoje.isFile() == true) {
+            labUstawieniaStatusXMLPokojeCheck.setForeground(new java.awt.Color(0, 200, 0));
             labUstawieniaStatusXMLPokojeCheck.setText("Plik XML istnieje!");
         } else {
             labUstawieniaStatusXMLPokojeCheck.setForeground(Color.RED);
             labUstawieniaStatusXMLPokojeCheck.setText("Brak pliku XML!");
         }
-        
-        
+
+
     }//GEN-LAST:event_buttonUstawieniaXMLPokojeWeryfikujActionPerformed
 
     private void buttonUstawieniaXMLGoscieNowyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUstawieniaXMLGoscieNowyActionPerformed
         // TODO add your handling code here:
-        
-        File bazaXMLgoscie = new File("C:\\Users\\HP\\Documents\\NetBeansProjects\\Pensjonat\\src\\database\\bazaXMLgoscie.xml");
-        if(bazaXMLgoscie.isFile() == false){
+
+        File bazaXMLgoscie = new File("C:\\Users\\HP\\Documents\\NetBeansProjects\\Pensjonat\\src\\database\\nowyGoscXML.xml");
+        if (bazaXMLgoscie.isFile() == false) {
             try {
                 bazaXMLgoscie.createNewFile();
                 labUstawieniaStatusXMLGoscieCheck.setText("Utworzono nowy plik!");
                 labUstawieniaStatusXMLGoscieCheck.setForeground(Color.YELLOW);
             } catch (IOException ex) {
                 Logger.getLogger(FramePensjonat.class.getName()).log(Level.SEVERE, null, ex);
-                
+
             }
         } else {
             labUstawieniaStatusXMLGoscieCheck.setText("Plik prawdopodobnie już istnieje.");
             labUstawieniaStatusXMLGoscieCheck.setForeground(Color.ORANGE);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_buttonUstawieniaXMLGoscieNowyActionPerformed
 
     private void buttonUstawieniaXMLPokojeNowyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUstawieniaXMLPokojeNowyActionPerformed
         // TODO add your handling code here:
-        
+
         File bazaXMLpokoje = new File("C:\\Users\\HP\\Documents\\NetBeansProjects\\Pensjonat\\src\\database\\bazaXMLpokoje.xml");
-        if(bazaXMLpokoje.isFile() == false){
+        if (bazaXMLpokoje.isFile() == false) {
             try {
                 bazaXMLpokoje.createNewFile();
                 labUstawieniaStatusXMLPokojeCheck.setText("Utworzono nowy plik!");
                 labUstawieniaStatusXMLPokojeCheck.setForeground(Color.YELLOW);
             } catch (IOException ex) {
                 Logger.getLogger(FramePensjonat.class.getName()).log(Level.SEVERE, null, ex);
-                
+
             }
         } else {
             labUstawieniaStatusXMLPokojeCheck.setText("Plik prawdopodobnie już istnieje.");
             labUstawieniaStatusXMLPokojeCheck.setForeground(Color.ORANGE);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_buttonUstawieniaXMLPokojeNowyActionPerformed
 
     private void buttonWyjscieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWyjscieActionPerformed
         // TODO add your handling code here:
-        
+
         dispose();
-        
+
     }//GEN-LAST:event_buttonWyjscieActionPerformed
 
     private void insertGoscNowyNazwiskoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertGoscNowyNazwiskoActionPerformed
         // TODO add your handling code here:
-        
-        
-        
+
+
     }//GEN-LAST:event_insertGoscNowyNazwiskoActionPerformed
 
     private void insertGoscNowyPeselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertGoscNowyPeselActionPerformed
@@ -1299,33 +1449,80 @@ public class FramePensjonat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_insertGoscNowyEmailActionPerformed
 
-    private void insertGoscNowyIDvalueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertGoscNowyIDvalueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insertGoscNowyIDvalueActionPerformed
-
     private void buttonGoscNowyZatwierdzSQLiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGoscNowyZatwierdzSQLiteActionPerformed
         // TODO add your handling code here:
-        
 
-    String nowyGoscImie = insertGoscNowyImie.getText();
-    String nowyGoscNazwisko = insertGoscNowyNazwisko.getText();
-    String nowyGoscPesel = insertGoscNowyPesel.getText();
-    String nowyGoscNrTelefonu = insertGoscNowyNrTelefonu.getText();
-    String nowyGoscEmail = insertGoscNowyEmail.getText();
-        
-        
-        Pensjonat pensjonat = new Pensjonat();
-        pensjonat.insertGosc(nowyGoscImie, nowyGoscNazwisko, nowyGoscPesel, nowyGoscNrTelefonu, nowyGoscEmail);
-        
- 
-        
+        String nowyGoscImie = insertGoscNowyImie.getText();
+        String nowyGoscNazwisko = insertGoscNowyNazwisko.getText();
+        String nowyGoscPesel = insertGoscNowyPesel.getText();
+        String nowyGoscNrTelefonu = insertGoscNowyNrTelefonu.getText();
+        String nowyGoscEmail = insertGoscNowyEmail.getText();
+
+        DBConnect pensjonat = new DBConnect();
+
+        if (nowyGoscImie.isEmpty()
+                | nowyGoscNazwisko.isEmpty()
+                | nowyGoscPesel.isEmpty()
+                | nowyGoscNrTelefonu.isEmpty()
+                | nowyGoscEmail.isEmpty()) {
+
+            labGoscNowyStatusInfo.setText("Puste pole!");
+            labGoscNowyStatusInfo.setForeground(Color.red);
+        } else {
+
+            pensjonat.insertGosc(nowyGoscImie, nowyGoscNazwisko, nowyGoscPesel, nowyGoscNrTelefonu, nowyGoscEmail);
+
+            labGoscNowyStatusInfo.setText("Zapisano SQL!");
+            labGoscNowyStatusInfo.setForeground(new java.awt.Color(0, 200, 0));
+            
+
+        }
+
     }//GEN-LAST:event_buttonGoscNowyZatwierdzSQLiteActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
 
-    
-    public static void main(String args[]) {
-       
+            labGoscNowyStatusInfo.setText("wprowadź dane");
+            labGoscNowyStatusInfo.setForeground(Color.GRAY);
+            
+            insertGoscNowyImie.setText("");
+            insertGoscNowyNazwisko.setText("");
+            insertGoscNowyPesel.setText("");
+            insertGoscNowyNrTelefonu.setText("");
+            insertGoscNowyEmail.setText("");
+
+
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void buttonListaWczytajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaWczytajActionPerformed
+        // TODO add your handling code here:
         
+
+        
+        
+        
+    }//GEN-LAST:event_buttonListaWczytajActionPerformed
+
+    private void buttonListaWyczyscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaWyczyscActionPerformed
+        // TODO add your handling code here:
+        
+
+        
+    }//GEN-LAST:event_buttonListaWyczyscActionPerformed
+
+    public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1355,38 +1552,29 @@ public class FramePensjonat extends javax.swing.JFrame {
                 new FramePensjonat().setVisible(true);
             }
         });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
         
         
     }
-    
-    
 
-    
 
+ public DBConnect dbc = new DBConnect();
+ 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonChecInDalej;
     private javax.swing.JButton buttonChecInWstecz;
     private javax.swing.JButton buttonCheckIn;
     private javax.swing.JButton buttonCheckOut;
+    private javax.swing.JButton buttonGoscNowyXML;
     private javax.swing.JButton buttonGoscNowyZatwierdzSQLite;
-    private javax.swing.JButton buttonGoscNowyZatwierdzXML;
     private javax.swing.JButton buttonGoscie;
     private javax.swing.JButton buttonGoscieLista;
-    private javax.swing.JButton buttonGoscieListaAktualizuj;
     private javax.swing.JButton buttonGoscieNowy;
     private javax.swing.JButton buttonGoscieUsun;
+    private javax.swing.JButton buttonListaWczytaj;
+    private javax.swing.JButton buttonListaWyczysc;
     private javax.swing.JButton buttonPokoje;
     private javax.swing.JButton buttonUstawienia;
     private javax.swing.JButton buttonUstawieniaSQLiteWeryfikuj;
@@ -1397,12 +1585,22 @@ public class FramePensjonat extends javax.swing.JFrame {
     private javax.swing.JButton buttonWyjscie;
     private javax.swing.JLabel imgLogo;
     private javax.swing.JTextField insertGoscNowyEmail;
-    private javax.swing.JTextField insertGoscNowyIDvalue;
     private javax.swing.JTextField insertGoscNowyImie;
     private javax.swing.JTextField insertGoscNowyNazwisko;
     private javax.swing.JTextField insertGoscNowyNrTelefonu;
     private javax.swing.JTextField insertGoscNowyPesel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1410,21 +1608,28 @@ public class FramePensjonat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel labChecInDane;
     private javax.swing.JLabel labChecInPokoj;
     private javax.swing.JLabel labChecInPotw;
     private javax.swing.JLabel labChecInWydajKarte;
     private javax.swing.JLabel labGoscNowyEmail;
-    private javax.swing.JLabel labGoscNowyID;
     private javax.swing.JLabel labGoscNowyNazwisko;
     private javax.swing.JLabel labGoscNowyNrTelefonu;
     private javax.swing.JLabel labGoscNowyPesel;
     private javax.swing.JLabel labGoscNowyStatus;
     private javax.swing.JLabel labGoscNowyStatusInfo;
-    private javax.swing.JLabel labGoscieListaLista;
-    private javax.swing.JLabel labGoscieListaNaglowek;
     private javax.swing.JLabel labUstawieniaStatusBazy;
     private javax.swing.JLabel labUstawieniaStatusBazy1;
     private javax.swing.JLabel labUstawieniaStatusBazy2;
@@ -1438,7 +1643,6 @@ public class FramePensjonat extends javax.swing.JFrame {
     private javax.swing.JPanel panelGoscie;
     private javax.swing.JPanel panelGoscieLista;
     private javax.swing.JPanel panelGoscieNowy;
-    private javax.swing.JPanel panelGoscieSeparator;
     private javax.swing.JPanel panelGoscieUsun;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelPokoje;

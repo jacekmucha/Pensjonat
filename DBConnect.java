@@ -1,4 +1,4 @@
-package pensjonat;
+
 
 import model.Gosc;
 import model.Pokoj;
@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Pensjonat {
+public class DBConnect extends FramePensjonat {
 
     public static final String DRIVER = "org.sqlite.JDBC";
     public static final String DB_URL = "jdbc:sqlite:C:\\Users\\HP\\Documents\\NetBeansProjects\\Pensjonat\\src\\database\\pensjonat.db";
@@ -24,10 +24,10 @@ public class Pensjonat {
     private Connection conn;
     private Statement stat;
 
-    public Pensjonat() {
+    public DBConnect() {
 
         try {
-            Class.forName(Pensjonat.DRIVER);
+            Class.forName(DBConnect.DRIVER);
         } catch (ClassNotFoundException e) {
             System.err.println("\nBrak sterownika JDBC!\n");
             e.printStackTrace();
