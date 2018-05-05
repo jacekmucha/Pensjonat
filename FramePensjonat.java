@@ -28,6 +28,7 @@ import model.CheckOut;
 import model.ListGosc;
 import org.w3c.dom.css.RGBColor;
 
+
 /**
  *
  * @author HP
@@ -57,6 +58,13 @@ public class FramePensjonat extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popupMenuListaGosci = new javax.swing.JPopupMenu();
+        menuZapisz = new javax.swing.JMenuItem();
+        menuSzczegolyPobytu = new javax.swing.JMenuItem();
+        menuPrzekwateruj = new javax.swing.JMenuItem();
+        menuWyczysc = new javax.swing.JMenuItem();
+        menuCofnijZmiane = new javax.swing.JMenuItem();
+        menuUsun = new javax.swing.JMenuItem();
         panelMenu = new javax.swing.JPanel();
         imgLogo = new javax.swing.JLabel();
         buttonGoscie = new javax.swing.JButton();
@@ -102,13 +110,14 @@ public class FramePensjonat extends javax.swing.JFrame {
         buttonGoscieLista = new javax.swing.JButton();
         panelGoscieLista = new javax.swing.JPanel();
         buttonListaWczytaj = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        buttonListaWyczysc = new javax.swing.JButton();
+        buttoListaDodaj = new javax.swing.JButton();
+        labListaGosci = new javax.swing.JLabel();
+        buttonListaUsun = new javax.swing.JButton();
+        buttonSzczegolyPobytu = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaListaGosci = new javax.swing.JTable();
+        labUpdateInfo = new javax.swing.JLabel();
+        labUpdateInfoText = new javax.swing.JTextField();
         buttonGoscieUsun = new javax.swing.JButton();
         panelGoscieUsun = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -157,6 +166,29 @@ public class FramePensjonat extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         buttonUstawieniaXMLGoscieNowy = new javax.swing.JButton();
         buttonUstawieniaXMLPokojeNowy = new javax.swing.JButton();
+
+        menuZapisz.setText("Zapisz");
+        menuZapisz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuZapiszActionPerformed(evt);
+            }
+        });
+        popupMenuListaGosci.add(menuZapisz);
+
+        menuSzczegolyPobytu.setText("Szczegóły pobytu");
+        popupMenuListaGosci.add(menuSzczegolyPobytu);
+
+        menuPrzekwateruj.setText("Przekwateruj");
+        popupMenuListaGosci.add(menuPrzekwateruj);
+
+        menuWyczysc.setText("Wyczyść");
+        popupMenuListaGosci.add(menuWyczysc);
+
+        menuCofnijZmiane.setText("Cofnij zmianę");
+        popupMenuListaGosci.add(menuCofnijZmiane);
+
+        menuUsun.setText("Usuń gościa");
+        popupMenuListaGosci.add(menuUsun);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -403,7 +435,7 @@ public class FramePensjonat extends javax.swing.JFrame {
         programWersja.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         programWersja.setForeground(new java.awt.Color(255, 255, 255));
         programWersja.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        programWersja.setText("v. 1.180428");
+        programWersja.setText("v. 1.180505");
 
         javax.swing.GroupLayout panelStartLayout = new javax.swing.GroupLayout(panelStart);
         panelStart.setLayout(panelStartLayout);
@@ -596,29 +628,27 @@ public class FramePensjonat extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Dodaj");
-
-        jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel14.setText("Lista Gości:");
-
-        jButton6.setText("Usuń ");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        buttoListaDodaj.setText("Dodaj");
+        buttoListaDodaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                buttoListaDodajActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Przekwateruj");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        labListaGosci.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        labListaGosci.setText("Lista Gości:");
+
+        buttonListaUsun.setText("Usuń ");
+        buttonListaUsun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                buttonListaUsunActionPerformed(evt);
             }
         });
 
-        buttonListaWyczysc.setText("Wyczyść widok");
-        buttonListaWyczysc.addActionListener(new java.awt.event.ActionListener() {
+        buttonSzczegolyPobytu.setText("Szczegóły pobytu");
+        buttonSzczegolyPobytu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonListaWyczyscActionPerformed(evt);
+                buttonSzczegolyPobytuActionPerformed(evt);
             }
         });
 
@@ -629,7 +659,7 @@ public class FramePensjonat extends javax.swing.JFrame {
                 "ID", "Imię", "Nazwisko", "PESEL", "Nr tel.", "Email"
             }, 0
         );
-        jTable1.setModel(model);
+        tabelaListaGosci.setModel(model);
 
         for (Gosc g : dbc.selectGosc() ) {
 
@@ -642,8 +672,18 @@ public class FramePensjonat extends javax.swing.JFrame {
                 }
 
             );
+            tabelaListaGosci.setComponentPopupMenu(popupMenuListaGosci);
         }
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tabelaListaGosci);
+
+        labUpdateInfo.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        labUpdateInfo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labUpdateInfo.setText("status aktualizacji:");
+        labUpdateInfo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        labUpdateInfoText.setForeground(new java.awt.Color(102, 102, 102));
+        labUpdateInfoText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        labUpdateInfoText.setText("(po aktualziacji gościa)");
 
         javax.swing.GroupLayout panelGoscieListaLayout = new javax.swing.GroupLayout(panelGoscieLista);
         panelGoscieLista.setLayout(panelGoscieListaLayout);
@@ -651,39 +691,46 @@ public class FramePensjonat extends javax.swing.JFrame {
             panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGoscieListaLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelGoscieListaLayout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttoListaDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonListaUsun, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(panelGoscieListaLayout.createSequentialGroup()
-                            .addComponent(jLabel14)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonListaWyczysc, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonListaWczytaj, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonSzczegolyPobytu, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelGoscieListaLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(labUpdateInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelGoscieListaLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(labUpdateInfoText))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoscieListaLayout.createSequentialGroup()
+                        .addComponent(labListaGosci)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonListaWczytaj, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         panelGoscieListaLayout.setVerticalGroup(
             panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGoscieListaLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonListaWczytaj, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonListaWyczysc, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
+                    .addComponent(labListaGosci))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                .addGroup(panelGoscieListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonListaUsun, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(buttoListaDodaj, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(buttonSzczegolyPobytu, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addGroup(panelGoscieListaLayout.createSequentialGroup()
+                        .addComponent(labUpdateInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labUpdateInfoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         buttonGoscieUsun.setText("Usuń Gościa");
@@ -1344,7 +1391,6 @@ public class FramePensjonat extends javax.swing.JFrame {
 
             labGoscNowyStatusInfo.setText("Zapisano XML!");
             labGoscNowyStatusInfo.setForeground(new java.awt.Color(0, 200, 0));
-            
 
         }
 
@@ -1474,7 +1520,6 @@ public class FramePensjonat extends javax.swing.JFrame {
 
             labGoscNowyStatusInfo.setText("Zapisano SQL!");
             labGoscNowyStatusInfo.setForeground(new java.awt.Color(0, 200, 0));
-            
 
         }
 
@@ -1483,43 +1528,89 @@ public class FramePensjonat extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-            labGoscNowyStatusInfo.setText("wprowadź dane");
-            labGoscNowyStatusInfo.setForeground(Color.GRAY);
-            
-            insertGoscNowyImie.setText("");
-            insertGoscNowyNazwisko.setText("");
-            insertGoscNowyPesel.setText("");
-            insertGoscNowyNrTelefonu.setText("");
-            insertGoscNowyEmail.setText("");
+        labGoscNowyStatusInfo.setText("wprowadź dane");
+        labGoscNowyStatusInfo.setForeground(Color.GRAY);
 
-
+        insertGoscNowyImie.setText("");
+        insertGoscNowyNazwisko.setText("");
+        insertGoscNowyPesel.setText("");
+        insertGoscNowyNrTelefonu.setText("");
+        insertGoscNowyEmail.setText("");
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void buttonSzczegolyPobytuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSzczegolyPobytuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_buttonSzczegolyPobytuActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void buttonListaUsunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaUsunActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_buttonListaUsunActionPerformed
 
     private void buttonListaWczytajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaWczytajActionPerformed
         // TODO add your handling code here:
-        
 
-        
-        
-        
+        tabelaListaGosci = new javax.swing.JTable();
+        javax.swing.table.DefaultTableModel model
+                = new javax.swing.table.DefaultTableModel(
+                        new String[]{
+                            "ID", "Imię", "Nazwisko", "PESEL", "Nr tel.", "Email"
+                        }, 0
+                );
+        tabelaListaGosci.setModel(model);
+
+        for (Gosc g : dbc.selectGosc()) {
+
+            model.addRow(
+                    new Object[]{
+                        g.getId(), g.getImie(), g.getNazwisko(),
+                        g.getPesel(), g.getNrTelefonu(), g.getEmail()
+
+                    }
+            );
+        }
+        jScrollPane3.setViewportView(tabelaListaGosci);
+
+
     }//GEN-LAST:event_buttonListaWczytajActionPerformed
 
-    private void buttonListaWyczyscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaWyczyscActionPerformed
+    private void buttoListaDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttoListaDodajActionPerformed
         // TODO add your handling code here:
+        
+        panelGoscieNowy.setVisible(true);
+        panelGoscieLista.setVisible(false);
+        panelGoscieUsun.setVisible(false);
+        
+        
+    }//GEN-LAST:event_buttoListaDodajActionPerformed
+
+    private void menuZapiszActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuZapiszActionPerformed
+        // TODO add your handling code here:
+        
+    int zaznaczonyWiersz = tabelaListaGosci.getSelectedRow();
+    int updateId = (int)tabelaListaGosci.getModel().getValueAt(zaznaczonyWiersz, 0);
+    String updateImie = (String)tabelaListaGosci.getModel().getValueAt(zaznaczonyWiersz, 1);
+    String updateNazwisko = (String)tabelaListaGosci.getModel().getValueAt(zaznaczonyWiersz, 2);
+    String updatePesel = (String)tabelaListaGosci.getModel().getValueAt(zaznaczonyWiersz, 3);
+    String updateNrTelefonu = (String)tabelaListaGosci.getModel().getValueAt(zaznaczonyWiersz, 4);
+    String updateEmail = (String)tabelaListaGosci.getModel().getValueAt(zaznaczonyWiersz, 5);
+        
+        
+//    Gosc zmienionyGosc = new Gosc();
+//    zmienionyGosc.setId(updateId);
+//    zmienionyGosc.setImie(updateImie);
+//    zmienionyGosc.setNazwisko(updateNazwisko);
+//    zmienionyGosc.setPesel(updatePesel);
+//    zmienionyGosc.setNrTelefonu(updateNrTelefonu);
+//    zmienionyGosc.setEmail(updateEmail);
+
+    dbc.updateGosc(updateId, updateImie, updateNazwisko, updatePesel, updateNrTelefonu, updateEmail);
+        
         
 
         
-    }//GEN-LAST:event_buttonListaWyczyscActionPerformed
+    }//GEN-LAST:event_menuZapiszActionPerformed
 
     public static void main(String args[]) {
 
@@ -1554,16 +1645,13 @@ public class FramePensjonat extends javax.swing.JFrame {
             }
         });
 
-
-        
-          
     }
 
+    private DBConnect dbc = new DBConnect();
 
-private DBConnect dbc = new DBConnect();
- 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttoListaDodaj;
     private javax.swing.JButton buttonChecInDalej;
     private javax.swing.JButton buttonChecInWstecz;
     private javax.swing.JButton buttonCheckIn;
@@ -1574,9 +1662,10 @@ private DBConnect dbc = new DBConnect();
     private javax.swing.JButton buttonGoscieLista;
     private javax.swing.JButton buttonGoscieNowy;
     private javax.swing.JButton buttonGoscieUsun;
+    private javax.swing.JButton buttonListaUsun;
     private javax.swing.JButton buttonListaWczytaj;
-    private javax.swing.JButton buttonListaWyczysc;
     private javax.swing.JButton buttonPokoje;
+    private javax.swing.JButton buttonSzczegolyPobytu;
     private javax.swing.JButton buttonUstawienia;
     private javax.swing.JButton buttonUstawieniaSQLiteWeryfikuj;
     private javax.swing.JButton buttonUstawieniaXMLGoscieNowy;
@@ -1591,17 +1680,13 @@ private DBConnect dbc = new DBConnect();
     private javax.swing.JTextField insertGoscNowyNrTelefonu;
     private javax.swing.JTextField insertGoscNowyPesel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1614,7 +1699,6 @@ private DBConnect dbc = new DBConnect();
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -1631,12 +1715,21 @@ private DBConnect dbc = new DBConnect();
     private javax.swing.JLabel labGoscNowyPesel;
     private javax.swing.JLabel labGoscNowyStatus;
     private javax.swing.JLabel labGoscNowyStatusInfo;
+    private javax.swing.JLabel labListaGosci;
+    private javax.swing.JLabel labUpdateInfo;
+    private javax.swing.JTextField labUpdateInfoText;
     private javax.swing.JLabel labUstawieniaStatusBazy;
     private javax.swing.JLabel labUstawieniaStatusBazy1;
     private javax.swing.JLabel labUstawieniaStatusBazy2;
     private javax.swing.JLabel labUstawieniaStatusBazyCheck;
     private javax.swing.JLabel labUstawieniaStatusXMLGoscieCheck;
     private javax.swing.JLabel labUstawieniaStatusXMLPokojeCheck;
+    private javax.swing.JMenuItem menuCofnijZmiane;
+    private javax.swing.JMenuItem menuPrzekwateruj;
+    private javax.swing.JMenuItem menuSzczegolyPobytu;
+    private javax.swing.JMenuItem menuUsun;
+    private javax.swing.JMenuItem menuWyczysc;
+    private javax.swing.JMenuItem menuZapisz;
     private javax.swing.JPanel panelCheckIn;
     private javax.swing.JPanel panelCheckInDane;
     private javax.swing.JPanel panelCheckInPostep;
@@ -1651,6 +1744,7 @@ private DBConnect dbc = new DBConnect();
     private javax.swing.JPanel panelStart;
     private javax.swing.JPanel panelStatus;
     private javax.swing.JPanel panelUstawienia;
+    private javax.swing.JPopupMenu popupMenuListaGosci;
     private javax.swing.JLabel programNazwa;
     private javax.swing.JLabel programNazwa1;
     private javax.swing.JLabel programNazwa10;
@@ -1664,5 +1758,6 @@ private DBConnect dbc = new DBConnect();
     private javax.swing.JLabel programNazwa8;
     private javax.swing.JLabel programNazwa9;
     private javax.swing.JLabel programWersja;
+    private javax.swing.JTable tabelaListaGosci;
     // End of variables declaration//GEN-END:variables
 }

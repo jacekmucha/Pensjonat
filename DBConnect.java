@@ -35,8 +35,8 @@ public class DBConnect {
 
         try {
 
-            conn = DriverManager.getConnection(DB_URL);
-            stat = conn.createStatement();
+                conn = DriverManager.getConnection(DB_URL);
+                stat = conn.createStatement();
 
         } catch (SQLException e) {
             System.err.println("\nProblem z otwarciem połączenia do bazy danych!\n");
@@ -96,8 +96,61 @@ public class DBConnect {
         }
         return true;
 
-
     }
+    
+    
+    private Connection connect(){
+    
+    String url = DB_URL;
+    Connection conn = null;
+     
+    try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    
+    } 
+    
+    public boolean updateGosc(int updateId, String updateImie, String updateNazwisko, String updatePesel,
+            String updateNrTelefonu, String updateEmail) {
+
+         String sql = "UPDATE goscie"
+                + "SET "    
+                + "imie = ?"
+                + "nazwisko = ?"
+                + "pesel = ?"
+                + "nrTelefonu = ?"
+                + "email = ?"
+                + "WHERE id_goscia = ?";
+         
+        try (Connection conn = this.connect();
+                PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+            
+             
+        preparedStatement.setString(1, updateImie);
+        preparedStatement.setString(2, updateNazwisko);
+        preparedStatement.setString(3, updatePesel);
+        preparedStatement.setString(4, updateNrTelefonu);
+        preparedStatement.setString(5, updateEmail);
+        preparedStatement.setInt(6, updateId);
+        
+        preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Błąd update gościa");
+            return false;     
+        }
+        return true;
+        
+   
+        
+    }
+    
+    
+    
 
 
     public boolean insertPokoj(int id, String typ, int czyZajety, int liczbaOsob, int liczbaLozek,
@@ -244,6 +297,9 @@ public class DBConnect {
         }
 
     }
+
+
+
 
 
 
