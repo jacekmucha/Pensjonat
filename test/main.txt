@@ -1,3 +1,5 @@
+a ja na pocz¹tku (jack strong)
+
 main();
 
 
